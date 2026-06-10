@@ -1,0 +1,9 @@
+we discussed section portions in A1 (assembly1)
+
+now lets learn a bit more about the section stuff.
+
+we learnt that section .{group} is used to define groups of instructions by nasm.
+
+.data - initiallizes data and variables
+.bss - allocate empty buffer reserves
+.text - main executable part

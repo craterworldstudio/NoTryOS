@@ -1,0 +1,45 @@
+Stage 1:
+CPU wakes up -
+Checks the first 512 bytes from some kind of Memory which points to the BIOS or UEFI firmware.
+
+After CPU starts the BIOS/UEFI firmware, which is run by the motherboard, it starts a list of jobs.
+
+Check RAM
+Check CPU
+Check keyboard
+Find storage devices
+Find something bootable
+
+the something bootable is the OS i guess, 
+This checklist is called "Power On Self Test" or POST.
+
+At the last stage, the firmware starts to find a bootable device like
+SSD, Bootable USB, DVD or from the network.
+depending Boot Priority Order.
+
+Then it selects the bootable device and loads a tiny program called The Bootloader. 
+Some xamples are Systemd, GRUB, Win Boot Manager.
+
+Then Bootloader starts its Job.
+Fine KernalLoad Kernal into RAM
+Jump to Kernal 
+which i guess means it runs the Kernal.
+
+At this step, the Bootloader stops (it exits)
+And Kernal Controls everything now.
+
+This is where the OS starts.
+
+Power Button
+     ↓
+CPU
+     ↓
+BIOS / UEFI
+     ↓
+Bootloader
+     ↓
+Kernel
+     ↓
+Shell
+     ↓
+User
