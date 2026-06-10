@@ -5,5 +5,140 @@ now lets learn a bit more about the section stuff.
 we learnt that section .{group} is used to define groups of instructions by nasm.
 
 .data - initiallizes data and variables
-.bss - allocate empty buffer reserves
+.bss - allocate empty buffer reserves for memeory mainly
 .text - main executable part
+
+these are all nasm specific directives. 
+
+next we define data.
+
+data can be divided based on their size. or atleast the size they are allocated.
+allocation of data can be understood by a simple analogy. 
+
+lets say you are a person who is going to buy a house. you go to a real estate agent and ask for a house for 1 person and he gives you a small house suitable for 1 person.
+Now lets say you get married and both of you cant stay in the small house adequately, so you buy a bigger house for 2 people.
+NOW, you have children, say 2, so you are now a 4 people family so the big house alwo cant accommodate you anymore. hence, you buy an even bigger house.
+just like the size of the house is proportional to the size of your family,
+data which needs to be stored in the memory needs a suitable 'house' or space. 
+
+the various sizes of data are,
+1 byte, referred as b or byte
+1 word = 2 bytes, referred as w or word
+1 doubleword = 4 bytes, referred as d or dword
+1 quadword = 8 bytes, referred as q or qword
+
+which are available for use and store stuff.
+
+data in low level or assembly is just numbers.
+be it decimal or hexadecimal. even alphabets are just numbers which are defined by the ASCII format.
+
+let us define a number variable with a value of 123 in the .data section
+
+section .data
+number db 123
+
+now we have a variable called 'number' with a value of 123 in it. the 'd' in db or dw or etc, stands for define. so its literally define byte or define word, etc.
+
+but this is only applicable for data we know, or constants. what about data value we dont know, which will be assigned a value mid-run. for them we need to keep a empty space allocated.
+its similar to how a real estate agent will keep small to big houses empty and for sale for people to buy. he doesn't know how many people will live in a house, but he knows the maximum number of people who CAN live in the house.
+
+similarly, we need to keep reserve spaces in .bss section. let us reserve a doubleword for a variable called price for a house where the price of the house can be 2^32 or 4,294,967,295. lets keep it at 2.5 mil.
+
+section .bss
+price resd 2500000
+
+where res stands for reserve. res-b/w/d/q have the usual meaning as mentioned before.
+later we can use mov to set the values of these reserved spaces.
+
+lastly for this note,
+we learn about variables.
+
+each variable can either store a value which can be anything, decimal. ascii, whatever you want. ORR, big OR, ahem. Address!
+to explain this simply. 
+imagine a town with only 1 straight road, with 25 houses on each side. divided into blocks, with 5 houses per block. you are a member of the city hall. and is asoed to issue a common notice to all the houses in the block but you only have 10 notice pamphlet and the content of the notice is too big to be transferred verbally.
+to solve the issue, what you do is give 1 notice to the first house of each block. But! you inform other houses of the block to read about the notice from the first house of their block or spyou simply tll them the address of the first house of each block.
+
+now, anyone who needs to read the notice and havent received it from the city hall themselves just remembers that you told them to check with the addres you gave them from their block. IN OTHER WORDS, you POINT them to the house which has the notice. and my friend, this is called a pointer. the house which needs to read the notice as a pointer to the notice house. therefore if it needs to know its value, it can go to that ADDRESS and know what value it holds.
+
+the notice is the actual data we give to variables.
+however an if we want to have a variable the same data as another, we just put the memory address of the other varuable into the desired variable but memory wise,
+variable2 contains the actual value,
+variable1 contains the address of variable2.
+
+to put the address of a variable A into another variable B=1 at the address 0x1001
+we use,
+
+mov A, B.
+
+it just puts the address of B into A. not the value of B. then A= 0x1001 which points to the address of B but if we want A to have the value of B, which is 1, then we use 
+
+mov A, [B]
+
+Which means go to the address of B, take whatever value is in B, and put it in A.
+
+Now a mind-boggling part, 
+uptil now we were moving variables and data between registers  but how about directly writing them?
+
+mov 0x1000, 5
+
+which means setting the memory address 0x1000 to 5, IS WRONG!!!
+
+to correctly assign the memory 0x1000 to 5, we use
+
+mov [0x1000], 5 which means go to 0x1000 and set it to 5.
+
+a good thumb rule regarding this, when you see, [], remember to use 'go to this address' whether be it an actual address or a variable address.
+now that we know some assembly, Lets try writing a program. refer to the question below and compare it with the answer on GoingGoodProgram.txt
+
+Problem Statement:
+
+--------------------------###############----------_-------
+Write a pure NASM x86-64 program that simulates a login validation system.
+You are not allowed to hardcode the result directly. All decisions must come from reading memory and comparing values.
+
+Requirements
+
+Create the following data:
+Stored Password
+User Guess
+Success Code
+Failure Code
+
+The password and guess should initially match and later different.
+The success and failure codes should be different numbers.
+
+Program Flow
+
+Step 1
+Load the password from memory.
+Load the user's guess from memory.
+Use proper memory dereferencing.
+
+Step 2
+Preserve one of the values using the stack.
+Use both:
+push
+pop
+for a meaningful reason.
+
+Step 3
+Compare the password and guess.
+Use: cmp
+along with conditional branching.
+
+You must use at least:
+je or jne
+
+Step 4
+If the login succeeds:
+Load the success code from memory.
+Place it into a register that will later become the process exit code. (hint: remember where we placed the exit code for linux to find it.)
+
+Step 5
+If the login fails:
+Load the failure code from memory.
+Place it into the same register.
+
+Step 6
+Exit using a Linux syscall.
+The program's exit code should indicate success or failure.
