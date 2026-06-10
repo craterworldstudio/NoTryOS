@@ -21,7 +21,8 @@ Then it selects the bootable device and loads a tiny program called The Bootload
 Some xamples are Systemd, GRUB, Win Boot Manager.
 
 Then Bootloader starts its Job.
-Fine KernalLoad Kernal into RAM
+Find Kernal
+Load Kernal into RAM
 Jump to Kernal 
 which i guess means it runs the Kernal.
 
