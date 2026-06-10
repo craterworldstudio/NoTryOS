@@ -4,25 +4,24 @@ section .data
 password dd 123456
 guess dd 837377 ; initial guess
 
-section .data
+section .text
 
 success:
   mov rax, 60
   mov rdi, 0
-  ret
+  syscall
 
 failure: 
   mov rax, 60
   mov rdi, 1
-  ret
+  syscall
 
 _start:
-  push password
-  mov [0x1000], password
+  mov eax, [password]
+  push rax
+  mov ecx, [guess]
   pop rbx
 
-  cmp [guess], rbx
+  cmp rcx, rbx
   je success
   jne failure
-
-  syscall
