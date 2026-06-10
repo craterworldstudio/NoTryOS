@@ -19,3 +19,11 @@ If you want to see the exit code of the programs
 just execute,
 
 echo $?
+
+
+
+
+
+Later when we write the bootloader, we will ditch the elf64 header altogether and stick to -f bin which is raw binary.
+
+Also Install qemu-base for the bootloader and the os to run as a whole. 
