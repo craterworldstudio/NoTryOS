@@ -36,6 +36,8 @@ print_nl:
     int 0x10 
     mov al, 0x0A                        ; LF
     int 0x10
+    mov al, 0x0D                        ; CR
+    int 0x10 
     mov al, 0x0A                        ; LF
     int 0x10
 
