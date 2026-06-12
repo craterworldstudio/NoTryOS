@@ -26,4 +26,5 @@ echo $?
 
 Later when we write the bootloader, we will ditch the elf64 header altogether and stick to -f bin which is raw binary.
 
-Also Install qemu-base for the bootloader and the os to run as a whole. 
+Also Install qemu-base and tiger vnc for the bootloader and the os to run as a whole. 
+(or install qemu-desktop with gtk and sdl)

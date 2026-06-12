@@ -7,3 +7,4 @@ Create a bootable Iso
 
 TrackRecord:
 learnt very basic assembly about mov, add, sub, jmp, cmp, int, pop, push, call, int.
+learnt about sections, functions, hlt, si reg.

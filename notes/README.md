@@ -12,3 +12,4 @@ Read:
 - assembly2.txt
 - Boot_Sequencep2.txt
 - bootloader.txt 
+- bootloader2.txt

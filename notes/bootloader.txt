@@ -12,7 +12,7 @@ dw 0xAA55
 '''
 
 and run it with 
-nasm -f bin boot.asm -o boot.bin
+nasm -f bin fboot.asm -o fboot.bin
 
 this time, no elf headers, raw binary.
 
@@ -22,6 +22,9 @@ qemu-system-x86_64 -drive format=raw,file=fboot.bin
 if you see VNC server running on ::1:5900 (5900 can be any port.)
 
 On another terminal, run vncviewer localhost:5900
+
+ORRR if you have qemu-desktop, simply run
+qemu-system-x86_64 -drive format=raw,file=fboot.bin -display sdl
 
 A black screen should appear with the text Booting from Hard Disk and then a blinking cursor.
 If the following occur, My friend, you wrote your first boot loader.
